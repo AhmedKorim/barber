@@ -1,7 +1,7 @@
 # **barber**
 
 
-* [project objectives](#1-project objectives)
+* [objectives](#1-project objectives)
 
 * [colors](#2-color)
 
