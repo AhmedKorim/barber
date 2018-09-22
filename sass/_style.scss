@@ -1,0 +1,328 @@
+%main-color-font {
+  color: $mainColor;
+}
+
+%sec-color-font {
+  color: $secColor;
+}
+
+%main-font {
+  font-family: 'Open Sans', sans-serif;
+
+}
+
+%lead {
+  font-family: 'Raleway', sans-serif;
+
+}
+
+%active-link {
+  color: $mainColor;
+  &:after {
+    width: 100%;
+    opacity: .7;
+  }
+}
+
+%bg-gradient {
+  background: linear-gradient(-45deg, transparentize($mainColor, .4) 0%, transparentize($secColor, .4) 100%);
+}
+
+%bg-full-gradient {
+  background: linear-gradient(-45deg, transparentize($mainColor, 0) 0%, transparentize($secColor, 0) 100%);
+}
+
+%text-gradient {
+  background: linear-gradient(-45deg, $mainColor 0%, $secColor 100%);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+
+}
+
+%text-gradient-remove {
+  background: transparent;
+  -webkit-text-fill-color: #ffffff;
+  -webkit-background-clip: border;
+
+}
+
+%hover-card {
+  -webkit-box-shadow: 0 0 25px transparentize($darkColor, .7);
+}
+
+.main-text-color {
+  @extend %main-color-font;
+}
+
+.second-text-color {
+  @extend %sec-color-font;
+}
+/*----------------------------------
+  shadows
+----------------------------------*/
+@mixin resshad($x,$y,$color,$blur:0,$spreed:0){
+  @media (max-width: 576px) {
+    box-shadow:ceil($x(576px/1200))ceil($y(576px/1200)) ceil($blur(576px/1200)px) ceil($spreed(576px/1200)) $color;
+  }
+  @media (min-width: 576px) {
+    box-shadow:ceil($x(576px/1200))ceil($y(576px/1200)) ceil($blur(576px/1200)px) ceil()$spreed(576px/1200) $color;
+  }
+
+  // Medium devices (tablets, 768px and up)
+  @media (min-width: 768px) {
+    box-shadow:ceil($x(768px/1200))ceil($y(768px/1200)) ceil($blur(768px/1200)px) $spreed(768px/1200) $color;
+  }
+
+  // Large devices (desktops, 992px and up)
+  @media (min-width: 992px) {
+    box-shadow:ceil($x(992px/1200))ceil($y(992px/1200)) ceil($blur(992px/1200)px) $spreed(992px/1200) $color;
+  }
+
+  // Extra large devices (large desktops, 1200px and up)
+  @media (min-width: 1200px) {
+    box-shadow:ceil($x(1200px/1200)) ceil($y(1200px/1200)) ceil($blur(1200px/1200)) ceil($spreed(1200/1200)) $color;
+  }
+
+}
+%sec-heading{
+  @extend %text-gradient;
+  text-align: center;
+  text-transform: capitalize;
+}
+/*----------------------------------
+  button
+----------------------------------*/
+%AKbutton {
+  position: relative;
+  border: none;
+  border-radius: 2rem;
+  background-color: white;
+  span, i {
+    @extend %text-gradient;
+    position: relative;
+    z-index: 10;
+    text-transform: uppercase;
+    font-weight: 700;
+
+  }
+  &:after {
+    border-radius: 0rem;
+    content: "";
+    z-index: 6;
+    position: absolute;
+    top: -3%;
+    left: 0%;
+    right: 0;
+    margin-right: auto;
+    margin-left: auto;
+    height: 106%;
+    width: 40%;
+    opacity: 0;
+    transition: all .35s ease-in-out;
+    @extend %bg-full-gradient;
+    box-shadow: 0px 0px 15px 1px transparentize(mix($mainColor, $secColor), .4);
+  }
+  &:hover, &:focus {
+    outline: none;
+    box-shadow: none;
+    border: none;
+    span, i {
+      @extend %text-gradient-remove;
+
+    }
+    &:after {
+      width: 106%;
+      border-radius: 2rem;
+      opacity: 1;
+
+    }
+  }
+
+  &.ak-fade {
+    &:after {
+      top: 0%;
+      left: 0%;
+      right: 0;
+      margin-right: auto;
+      margin-left: auto;
+      height: 100%;
+      width: 100%;
+      border-radius: 2rem;
+    }
+    &:hover, &:focus {
+      &:after {
+        opacity: 1;
+
+      }
+    }
+  }
+
+}
+/*----------------------------------
+  new button
+----------------------------------*/
+%crips {
+  cursor: pointer;
+  background: transparent;
+  display: table;
+  margin: 0;
+  border: none;
+  box-shadow: none;
+  outline: none;
+  padding: 0;
+  overflow: hidden;
+  text-align: center;
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  i,span {
+    display: table-cell;
+    vertical-align: middle;
+   @extend %text-gradient;
+    position: relative;
+    z-index: 4;
+  }
+  &.native{
+      i,span{
+        display: block;
+
+      }
+  }
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    @extend %bg-full-gradient;
+    opacity: 1;
+    z-index: 2;
+    transition: .3s ease-in-out all;
+  }
+  &::before {
+    content: '';
+    background: #FFF;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    z-index: 3 ;
+    transition: .3s ease-in-out all;
+  }
+  &:hover {
+    margin: 0;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    padding: 0;
+    background-color:transparent;
+    text-decoration: none;
+    &:before {
+      width: 0%;
+
+    }
+    i,span{
+     @extend %text-gradient-remove;
+    }
+  }
+  &.inverse{
+    i,span {
+      @extend %text-gradient-remove;
+    }
+
+    &:after {
+      background: #FFF;
+    }
+    &::before {
+      @extend %bg-full-gradient;
+    }
+    &:hover {
+      i,span{
+        background: linear-gradient(-45deg, $mainColor 0%, $secColor 100%);
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+      }
+    }
+  }
+  &.akfade{
+    &::before {
+      opacity: 1;
+      z-index: 3 ;
+      transition: .4s ease-in-out all;
+    }
+    &:after {
+      @extend %bg-full-gradient;
+      opacity: 0;
+      z-index: 3;
+      transition: .3s ease-in-out all;
+    }
+    &:hover{
+      &::before {
+        opacity: 0;
+        width: 100%;
+      }
+      &::after {
+        opacity: 1;
+        width: 100%;
+
+      }
+    }
+  }
+}
+
+/*----------------------------------
+  form elments
+----------------------------------*/
+
+/*----------------------------------
+  rounded input
+----------------------------------*/
+%rounded {
+  width: 80%;
+  margin: auto;
+  position: relative;
+  height: 4rem;
+  border-radius: 2rem;
+  box-shadow: 0px 2px 5px transparentize($darkColor, .8), 0px -2px 5px transparentize($darkColor, .8);
+  border: 1px solid transparentize($darkColor, .8);
+  padding: 0;
+  input {
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    top: 0;
+    left: 3rem;
+    z-index: 4;
+    width: 80%;
+    height: 100%;
+    &:focus {
+      outline: none;
+      box-shadow: none;
+      & + label {
+        transform: translate3d(0, -140%, 0);
+      }
+    }
+  }
+  label {
+    position: absolute;
+    text-transform: capitalize;
+    left: 3.3rem;
+    z-index: 5;
+    top: 50%;
+    transition: all .35s ease-in-out;
+    transform: translate3d(0, -50%, 0);
+    display: block;
+    color: $darkColor;
+    font-weight: 400;
+    font-size: .9rem;
+    letter-spacing: .03rem;
+    line-height: 1.5rem;
+
+  }
+}
